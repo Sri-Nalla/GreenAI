@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Green AI</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" href="./images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' media='screen' href='style/webcam-demo.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style/login.css'>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./dist/webcam-easy.js"></script>
+</head>
+<body>
+
+	  <header>
+	    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+	      <img src="./images/logo.png" height="35px" width="35px"/><a class="ml-1 navbar-brand" href="#">Green AI <span class="text-muted" style="font-size:16px; font-style: italic">- A game for change</span></a>
+	      <button class="navbar-toggler" type="button" onclick="togglenav()" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	      <div class="collapse navbar-collapse d-none" id="navbarCollapse">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" onclick="signin()">Monthly Score</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" onclick="scoreboard()">Friends Score Board</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="" tabindex="-1">About</a>
+	          </li>
+	        </ul>
+	        <form class="form-inline mt-2 mt-md-0">
+	          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+	          <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="Submit">Search</button>
+	          <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="button" id="btnLogin" onclick="logout()">Logout</button>
+	          <button class="btn btn-outline-success my-2 my-sm-0 mr-2" type="button" id="btnRegister" onclick="registerClick()">Register</button>
+	        </form>
+	      </div>
+	    </nav>
+		</header>
+
+    <main id="webcam-app">
+    	<div id="loginform" class="container h-100 mt-5">
+			<div class="d-flex justify-content-center h-100">
+				<div class="user_card">
+					<div class="d-flex justify-content-center">
+						<div class="brand_logo_container">
+							<img src="./images/logo.png" class="brand_logo" alt="Logo">
+						</div>
+					</div>
+					<div class="d-flex justify-content-center form_container">
+						<form>
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input type="text" name="" class="form-control input_user" value="" placeholder="username">
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" name="" class="form-control input_pass" value="" placeholder="password">
+							</div>
+							<div class="form-group">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customControlInline">
+									<label class="custom-control-label" for="customControlInline">Remember me</label>
+								</div>
+							</div>
+								<div class="d-flex justify-content-center mt-3 login_container">
+					 	<button type="button" name="button" class="btn login_btn" onclick="signin()">Login</button>
+					   </div>
+						</form>
+					</div>
+
+					<div class="mt-4">
+						<div class="d-flex justify-content-center links">
+							Don't have an account? <button id="register" onclick="registerClick()" class="ml-2 btn-link" role="link">Sign Up</button>
+						</div>
+						<div class="d-flex justify-content-center links">
+							<button class="btn-link">Forgot your password?</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    	<div id="registerform" class="container h-100 d-none">
+			<div class="d-flex justify-content-center h-100">
+				<div class="user_register_card">
+					<div class="d-flex justify-content-center">
+						<div class="brand_logo_container">
+							<img src="./images/logo.png" class="brand_logo" alt="Logo">
+						</div>
+					</div>
+					<div class="d-flex justify-content-center form_container">
+						<form>
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input type="text" name="" class="form-control input_user" value="" placeholder="username">
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" name="" class="form-control input_pass" value="" placeholder="password">
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-key"></i></span>
+								</div>
+								<input type="password" name="" class="form-control input_pass" value="" placeholder="confirm password">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input type="text" name="" class="form-control input_user" value="" placeholder="firstname">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fas fa-user"></i></span>
+								</div>
+								<input type="text" name="" class="form-control input_user" value="" placeholder="lastname">
+							</div>
+							<div class="form-group">
+								<div class="custom-control custom-checkbox">
+									<input type="checkbox" class="custom-control-input" id="customControlInline">
+									<label class="custom-control-label" for="customControlInline">Do you recycle plastics, aluminum etc?</label>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center mt-3 login_container">
+					 		<button type="button" name="button" class="btn login_btn" onclick="loginClick()">Register</button>
+					   </div>
+					</form>
+					</div>
+
+					<div class="mt-4">
+						<div class="d-flex justify-content-center links">
+							Do have an account? <button class="ml-2 btn-link" onclick="loginClick()" role="link">Sign In</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+<!-- CO2 Score Board Start -->
+<div id="scoreModal" class="mt-2 d-none">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close text-right">&times;</span>
+    	<div class="row">
+		<div class="container d-flex justify-content-center mt-1">
+          <div class="card p-3 mt-1">
+             <h5 class="mt-3 mb-3">Green AI Score Board</h5>
+
+               <div class="border p-2 rounded d-flex flex-row align-items-center">
+                <div class="p-1 px-4 d-flex flex-column align-items-center score rounded bg-success">
+                    <span class="d-block char">1000 lbs</span>
+                    <span class="text-success">-220 lbs (Avg. diff)</span>
+                </div>
+                <div class="ml-2 p-3">
+                    <h6 class="heading1">Sri</h6>
+                    <span>Excellent! keep working on your goals</span>
+                 </div>
+               </div>
+
+             <div class="border p-2 rounded d-flex flex-row align-items-center mt-2">
+                 <div class="p-1 px-4 d-flex flex-column align-items-center speed rounded bg-warning">
+                      <span class="d-block char">990 lbs</span>
+                       <span class="text-warning">-230 lbs (Avg. diff)</span>
+            	 </div>
+                 <div class="ml-2 p-4">
+                        <h6 class="text">Christopher</h6>
+                       <span>Great job! you are almost there</span>
+                  </div>
+             </div>
+
+             <div class="border p-2 rounded d-flex flex-row align-items-center mt-2">
+                 <div class="p-1 px-4 d-flex flex-column align-items-center speed rounded bg-primary">
+                      <span class="d-block char">980 lbs</span>
+                       <span class="text-primary">-240 lbs (Avg. diff)</span>
+            	 </div>
+                 <div class="ml-2 p-4">
+                        <h6 class="text">Max</h6>
+                       <span>Wow! you are almost there.</span>
+                  </div>
+             </div>
+
+            </div>
+	     </div>
+	  </div>
+  </div>
+  <p class="ml-3">* Based on a yearly average of 1220 lbs CO2 reduction per household</p>
+</div>
+<!-- CO2 Score Board End -->
+
+
+	  <div id="monthlyscore" class="row mt-5 mb-2 d-none">
+
+		<div class="col-md-3 order-md-2 mb-1">
+		  <h4 class="d-flex justify-content-between align-items-center mb-3">
+			<span class="text-success">September 2024</span>
+		  </h4>
+		  <ul class="list-group mb-3">
+			<li class="list-group-item d-flex justify-content-between lh-condensed">
+			  <div>
+				<h6 class="my-0">Recycle (lbs)</h6>
+				<small class="text-muted">Cans 89, Plastic 36, Glass 25, Paper 113 </small>
+			  </div>
+			  <span class="text-success" id="recycleresult">16.5 lbs</span>
+			</li>
+
+			<li class="list-group-item d-flex justify-content-between lh-condensed">
+			  <div>
+				<h6 class="my-0">Regional Average</h6>
+				<small class="text-muted">In your region</small>
+			  </div>
+			  <span class="text-muted">122 lbs</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between">
+			  <span>Difference</span>
+			  <span class="text-primary" id="diff">-105.5 lbs</span>
+			</li>
+		  </ul>
+
+		</div>
+    	<div class="col-md-3 order-md-2 mb-1">
+		  <h4 class="d-flex justify-content-between align-items-center mb-3">
+			<span class="text-success">October 2024</span>
+		  </h4>
+		  <ul class="list-group mb-3">
+			<li class="list-group-item d-flex justify-content-between lh-condensed">
+			  <div>
+				<h6 class="my-0">Recycle (lbs)</h6>
+				<small class="text-muted">Cans 89, Plastic 36, Glass 25, Paper 113 </small>
+			  </div>
+			  <span class="text-success" id="recycleresult">16.5 lbs</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between lh-condensed">
+			  <div>
+				<h6 class="my-0">Regional Average</h6>
+				<small class="text-muted">In your region</small>
+			  </div>
+			  <span class="text-muted">-122 lbs</span>
+			</li>
+			<li class="list-group-item d-flex justify-content-between">
+			  <span>Difference</span>
+			  <span class="text-primary" id="diff">-105.5 lbs</span>
+			</li>
+		  </ul>
+
+		</div>
+			<p class="ml-3">* Higher score is better - more CO2 saved</p>
+	  </div>
+
+
+        <div class="form-control webcam-start" id="webcam-control">
+                <label class="form-switch">
+                <input type="checkbox" id="webcam-switch">
+                <i></i>
+                <span id="webcam-caption">Try</span>
+                </label>
+                <button id="cameraFlip" class="btn d-none"></button>
+				<!--<button id="camera_switchon" title="Turn on Camera" class="btn-link d-none"><i class="material-icons">videocam</i></button>
+				<button id="camera_switchoff" title="Turn off Camera" class="btn-link d-none"><i class="material-icons">videocam_off</i></button>-->
+        </div>
+
+        <div id="errorMsg" class="col-12 col-md-6 alert-danger d-none">
+            Fail to start camera, please allow permision to access camera. <br/>
+            If you are browsing through social media built in browsers, you would need to open the page in Sarafi (iPhone)/ Chrome (Android)
+            <button id="closeError" class="btn btn-primary ml-3">OK</button>
+        </div>
+        <div class="md-modal md-effect-12">
+            <div id="app-panel" class="app-panel md-content row p-0 m-0">
+                <div id="webcam-container" class="webcam-container col-12 d-none p-0 m-0">
+					<div id="message" class="col-12 col-md-6 alert-success">
+						Take a Pictue or Upload an image of all the items you want to recyle.<br/>
+						We will calculate the CO2 in lbs saved from emission.
+					</div>
+	                <label id="upload-image" style="position:relative;top:60vh;color:white" for="file-upload" class="custom-file-upload">
+					    <i class="material-icons">camera_alt</i>
+					</label>
+                	<input type="file" class="d-none" id="file-upload" style="position:relative;top:15vh;color:white" capture="camera" accept="image/*"
+                		onchange="loadFile(event)"/>
+                    <video id="webcam" autoplay playsinline width="640" height="480"></video>
+                    <canvas id="canvas" class="d-none"></canvas>
+                    <img src="" id="image-container-preview" class="d-none"/>
+					<img src="" id="image-container" alt="AI result image" class="d-none"/>
+                    <div class="flash"></div>
+                    <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+                </div>
+                <div id="cameraControls" class="cameraControls">
+                	<div><button id="co2score" class="btn btn-success d-none">0 items recycled. You saved 0 lbs of CO2</button></div>
+                    <!--<button id="take-photo" title="Take Photo" class="btn-link d-none"><i class="material-icons">camera_alt</i></button>-->
+                    <button id="resume-camera" title="Resume Camera" class="btn-link d-none"><i class="material-icons">camera_front</i></button>
+					<button id="upload-photo" title="Upload Photo" class="btn-link d-none" onclick="handleAuthClick(false)"><i class="material-icons">file_upload</i></button>
+
+                    <button id="sync-result" title="Sync Result" onclick="handleAuthClick(true)" class="btn-link d-none"><i class="material-icons">sync</i></button>
+					<button id="refresh" title="refresh" class="btn-link d-none" onclick="handleAuthClick(false)"><i class="material-icons">refresh</i></button>
+                    <a href="#" id="download-photo" target="_blank" download="selfie.png" title="Save Photo" class="d-none"><i class="material-icons">file_download</i></a>
+					<!--<button id="close" title="Close App" class="btn-link d-none"><i class="material-icons">close</i></button>-->
+                    <button id="exit-app" title="Exit App" class="btn-link d-none"><i class="material-icons">power_settings_new</i></button>
+
+                </div>
+				<div id="content" class="success message"><?php if(isset($message)) { echo $message; } ?></div>
+            </div>
+        </div>
+        <div class="md-overlay"></div>
+
+    </main>
+    <script src='./js/app.js'></script>
+    <script type="text/javascript" src="./js/gapi-upload.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+        onload="gapiLoaded()"></script>
+    <script async defer src="https://accounts.google.com/gsi/client"
+        onload="gisLoaded()"></script>
+
+</body>
+</html>
